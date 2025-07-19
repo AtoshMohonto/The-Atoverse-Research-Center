@@ -153,5 +153,39 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+  // Show main banking nav and modules after Get Started
+  document.addEventListener('DOMContentLoaded', function() {
+    const getStartedBtn = document.querySelector('.btn-primary');
+    if (getStartedBtn) {
+      getStartedBtn.addEventListener('click', function() {
+        // Hide hero and services/testimonials/contact/footer sections
+        document.querySelector('.hero').style.display = 'none';
+        document.getElementById('services').style.display = 'none';
+        const testimonials = document.querySelector('.testimonials');
+        if (testimonials) testimonials.style.display = 'none';
+        const contact = document.getElementById('contact');
+        if (contact) contact.style.display = 'none';
+        const footer = document.querySelector('footer');
+        if (footer) footer.style.display = 'none';
+
+        // Show main nav and Home module
+        document.querySelector('.navbar').style.display = 'block';
+        document.getElementById('homeModule').style.display = 'block';
+
+        // Set balance to $1048.00
+        document.getElementById('balance').textContent = '1048.00';
+      });
+    }
+
+    // Initially hide main nav and modules
+    document.querySelector('.navbar').style.display = 'none';
+    document.getElementById('homeModule').style.display = 'none';
+    document.getElementById('depositModule').style.display = 'none';
+    document.getElementById('withdrawModule').style.display = 'none';
+    document.getElementById('historyModule').style.display = 'none';
+    document.getElementById('settingsModule').style.display = 'none';
+  });
+</script>
 </body>
 </html>
