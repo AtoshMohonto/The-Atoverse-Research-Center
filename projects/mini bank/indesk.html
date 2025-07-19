@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Bank</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>💳 Mini Bank</header>
+  <div class="card">
+    <div class="balance">Balance: $<span id="balance">1000</span></div>
+    <input type="number" id="amount" placeholder="Enter amount" />
+    <button onclick="deposit()">Deposit</button>
+    <button onclick="withdraw()">Withdraw</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
