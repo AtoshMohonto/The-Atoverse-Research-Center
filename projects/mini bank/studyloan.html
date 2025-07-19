@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Study Loan - Mini Bank</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>🎓 Study Loan Portal</header>
+  <nav class="navbar">
+    <ul>
+      <li><a href="indesk.html">Back to Bank</a></li>
+      <li><a href="#" onclick="showLoanModule('apply')">Apply Loan</a></li>
+      <li><a href="#" onclick="showLoanModule('status')">Loan Status</a></li>
+      <li><a href="#" onclick="showLoanModule('repayment')">Repayment</a></li>
+      <li><a href="#" onclick="showLoanModule('faq')">FAQ</a></li>
+      <li><a href="/spc.html" onclick="showLoanModule('spcloan')">spc loan</a></li>
+      <li><a href="#" onclick="showLoanModule('contact')">Contact Support</a></li>
+    </ul>
+  </nav>
+
+  <!-- Loan Modules -->
+  <div class="card module" id="applyModule">
+    <h2>Apply for Study Loan</h2>
+    <input type="text" placeholder="Student Name" />
+    <input type="number" placeholder="Loan Amount" />
+    <input type="text" placeholder="Course/Program" />
+    <button>Submit Application</button>
+    <div class="message"></div>
+  </div>
+
+  <div class="card module" id="statusModule" style="display:none;">
+    <h2>Loan Status</h2>
+    <p>Check your application status here.</p>
+  </div>
+
+  <div class="card module" id="repaymentModule" style="display:none;">
+    <h2>Repayment</h2>
+    <p>View repayment schedule and make payments.</p>
+  </div>
+
+  <div class="card module" id="faqModule" style="display:none;">
+    <h2>FAQ</h2>
+    <p>Frequently Asked Questions about Study Loans.</p>
+  </div>
+
+  <div class="card module" id="contactModule" style="display:none;">
+    <h2>Contact Support</h2>
+    <p>Email: support@minibank.com<br>Phone: 123-456-7890</p>
+  </div>
+
+  <script>
+  // Module switching
+  function showLoanModule(module) {
+    document.querySelectorAll('.module').forEach(m => m.style.display = 'none');
+    document.getElementById(module + 'Module').style.display = 'block';
+    if (module === 'status') renderLoanStatus();
+    if (module === 'repayment') renderRepayment();
+  }
+
+  // Smart loan status storage
+  let loanStatus = {
+    applied: false,
+    studentName: '',
+    loanAmount: 0,
+    course: '',
+    approved: false,
+    repaid: 0,
+    repayments: []
+  };
+
+  // Apply for loan
+  document.querySelector('#applyModule button').onclick = function() {
+    const name = document.querySelector('#applyModule input[type="text"]').value;
+    const amount = parseFloat(document.querySelectorAll('#applyModule input[type="number"]')[0].value);
+    const course = document.querySelectorAll('#applyModule input[type="text"]')[1].value;
+    if (!name || isNaN(amount) || !course) {
+      document.querySelector('#applyModule .message').textContent = 'Please fill all fields!';
+      document.querySelector('#applyModule .message').style.color = 'red';
+      return;
+    }
+    loanStatus.applied = true;
+    loanStatus.studentName = name;
+    loanStatus.loanAmount = amount;
+    loanStatus.course = course;
+    loanStatus.approved = true; // For demo, auto-approve
+    document.querySelector('#applyModule .message').textContent = 'Application submitted and approved!';
+    document.querySelector('#applyModule .message').style.color = 'green';
+    renderLoanStatus();
+  };
+
+  // Render loan status
+  function renderLoanStatus() {
+    const statusDiv = document.getElementById('statusModule');
+    if (!loanStatus.applied) {
+      statusDiv.innerHTML = `<h2>Loan Status</h2><p>No application found.</p>`;
+      return;
+    }
+    let repaid = loanStatus.repaid || 0;
+    let remaining = loanStatus.loanAmount - repaid;
+    statusDiv.innerHTML = `
+      <h2>Loan Status</h2>
+      <p><strong>Name:</strong> ${loanStatus.studentName}</p>
+      <p><strong>Course:</strong> ${loanStatus.course}</p>
+      <p><strong>Loan Amount:</strong> $${loanStatus.loanAmount}</p>
+      <p><strong>Status:</strong> ${loanStatus.approved ? 'Approved' : 'Pending'}</p>
+      <p><strong>Repaid:</strong> $${repaid}</p>
+      <p><strong>Remaining:</strong> $${remaining}</p>
+      <p><strong>Repayments:</strong></p>
+      <ul>${loanStatus.repayments.map(r => `<li>$${r.amount} on ${r.date}</li>`).join('')}</ul>
+    `;
+  }
+
+  // Repayment logic
+  function renderRepayment() {
+    const repayDiv = document.getElementById('repaymentModule');
+    if (!loanStatus.applied) {
+      repayDiv.innerHTML = `<h2>Repayment</h2><p>No loan to repay.</p>`;
+      return;
+    }
+    repayDiv.innerHTML = `
+      <h2>Repayment</h2>
+      <input type="number" id="repayAmount" placeholder="Enter repayment amount" />
+      <button onclick="makeRepayment()">Make Payment</button>
+      <div class="message" id="repayMessage"></div>
+    `;
+  }
+
+  window.makeRepayment = function() {
+    const amount = parseFloat(document.getElementById('repayAmount').value);
+    if (isNaN(amount) || amount <= 0) {
+      document.getElementById('repayMessage').textContent = 'Enter a valid amount!';
+      document.getElementById('repayMessage').style.color = 'red';
+      return;
+    }
+    if ((loanStatus.repaid + amount) > loanStatus.loanAmount) {
+      document.getElementById('repayMessage').textContent = 'Cannot repay more than loan amount!';
+      document.getElementById('repayMessage').style.color = 'red';
+      return;
+    }
+    loanStatus.repaid += amount;
+    loanStatus.repayments.push({ amount, date: new Date().toLocaleString() });
+    document.getElementById('repayMessage').textContent = 'Payment successful!';
+    document.getElementById('repayMessage').style.color = 'green';
+    renderLoanStatus();
+    renderRepayment();
+  };
+
+  // Initial render
+  renderLoanStatus();
+  </script>
+</body>
+</html>

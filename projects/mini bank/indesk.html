@@ -7,76 +7,83 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>💳 Mini Bank</header>
-  <nav class="navbar">
-    <ul>
-      <li><a href="#" onclick="showModule('home')">Home</a></li>
-      <li><a href="#" onclick="showModule('deposit')">Deposit</a></li>
-      <li><a href="#" onclick="showModule('withdraw')">Withdraw</a></li>
-      <li><a href="#" onclick="showModule('history')">History</a></li>
-      <li><a href="#" onclick="showModule('settings')">Settings</a></li>
-    </ul>
-  </nav>
+  <header>
+    <h2>Mini Bank</h2>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+      <a href="studyloan.html">Study Loan</a>
+      <a href="spc.html">Student PC Loan</a>
+      <a href="#" class="btn-primary">Login</a>
+    </nav>
+  </header>
 
-  <!-- Home Module (unchanged) -->
-  <div class="card module" id="homeModule">
-    <div class="balance">Balance: $<span id="balance">1000</span></div>
-    <input type="number" id="amount" placeholder="Enter amount" />
-    <button onclick="deposit()">Deposit</button>
-    <button onclick="withdraw()">Withdraw</button>
-    <button onclick="resetBalance()">Reset Balance</button>
-    <div class="message" id="message"></div>
-    <div class="history">
-      <h3>Transaction History</h3>
-      <ul id="historyList"></ul>
+  <section class="hero">
+    <div>
+      <h1>Your Smart Banking Partner</h1>
+      <button class="btn-primary">Get Started</button>
     </div>
-  </div>
+  </section>
 
-  <!-- Deposit Module -->
-  <div class="card module" id="depositModule" style="display:none;">
-    <h2>Deposit Funds</h2>
-    <input type="number" id="depositAmount" placeholder="Enter deposit amount" />
-    <select id="depositMethod">
-      <option value="cash">Cash</option>
-      <option value="cheque">Cheque</option>
-      <option value="online">Online Transfer</option>
-    </select>
-    <button onclick="deposit()">Deposit</button>
-    <div class="message" id="depositMessage"></div>
-  </div>
+  <section id="services" class="services">
+    <h2>Our Services</h2>
+    <div class="service-boxes">
+      <div class="service-box">
+        <i class="fas fa-piggy-bank"></i>
+        <h4>Savings Accounts</h4>
+      </div>
+      <div class="service-box">
+        <i class="fas fa-university"></i>
+        <h4>Loans</h4>
+      </div>
+      <div class="service-box">
+        <i class="fas fa-mobile-alt"></i>
+        <h4>Mobile Banking</h4>
+      </div>
+      <div class="service-box">
+        <i class="fas fa-chart-line"></i>
+        <h4>Investments</h4>
+      </div>
+    </div>
+  </section>
 
-  <!-- Withdraw Module -->
-  <div class="card module" id="withdrawModule" style="display:none;">
-    <h2>Withdraw Funds</h2>
-    <input type="number" id="withdrawAmount" placeholder="Enter withdraw amount" />
-    <select id="withdrawMethod">
-      <option value="atm">ATM</option>
-      <option value="counter">Counter</option>
-      <option value="online">Online Transfer</option>
-    </select>
-    <button onclick="withdraw()">Withdraw</button>
-    <div class="message" id="withdrawMessage"></div>
-  </div>
+  <section class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="slider">
+      <div class="testimonial">
+        <p>"Mini Bank is easy to use and trustworthy!"</p>
+        <small>- Sarah M.</small>
+      </div>
+      <div class="testimonial">
+        <p>"Excellent support and fast service."</p>
+        <small>- John D.</small>
+      </div>
+      <div class="testimonial">
+        <p>"Secure and modern. Mobile banking is seamless."</p>
+        <small>- Priya R.</small>
+      </div>
+    </div>
+  </section>
 
-  <!-- History Module -->
-  <div class="card module" id="historyModule" style="display:none;">
-    <h2>Transaction History</h2>
-    <ul id="fullHistoryList"></ul>
-    <button onclick="clearHistory()">Clear History</button>
-  </div>
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button class="btn-primary" type="submit">Send Message</button>
+    </form>
+  </section>
 
-  <!-- Settings Module -->
-  <div class="card module" id="settingsModule" style="display:none;">
-    <h2>Settings</h2>
-    <label for="initialBalance">Set Initial Balance:</label>
-    <input type="number" id="initialBalance" placeholder="e.g. 1000" />
-    <button onclick="setInitialBalance()">Set Balance</button>
-    <label>
-      <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()" />
-      Dark Mode
-    </label>
-    <div class="message" id="settingsMessage"></div>
-  </div>
+  <footer>
+    <div class="social">
+      <i class="fab fa-facebook"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-linkedin"></i>
+    </div>
+    <p>&copy; 2025 Mini Bank. All rights reserved.</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
