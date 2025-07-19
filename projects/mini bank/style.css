@@ -14,6 +14,11 @@ body {
   padding: 30px;
 }
 
+body.dark-mode {
+  background: #181818;
+  color: #eee;
+}
+
 header {
   background: #0078d4;
   color: white;
@@ -31,6 +36,12 @@ header {
   margin-top: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card.dark-mode {
+  background: #232323;
+  color: #eee;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
 .balance {
@@ -62,11 +73,28 @@ button:hover {
   background: #005fa3;
 }
 
+button:disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
 .message {
   text-align: center;
   margin-top: 10px;
   color: green;
 }
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.98em;
+}
+
+.transaction.deposit { color: #0078d4; }
+.transaction.withdraw { color: #d40000; }
 
 .navbar {
   width: 100%;
@@ -97,4 +125,10 @@ button:hover {
 .navbar a:hover {
   background: #005fa3;
   border-radius: 5px;
+}
+
+#fullHistoryList {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
 }
