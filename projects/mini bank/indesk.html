@@ -8,14 +8,29 @@
 </head>
 <body>
   <header>💳 Mini Bank</header>
-  <div class="card">
+  <nav class="navbar">
+    <ul>
+      <li><a href="#" onclick="showModule('home')">Home</a></li>
+      <li><a href="#" onclick="showModule('deposit')">Deposit</a></li>
+      <li><a href="#" onclick="showModule('withdraw')">Withdraw</a></li>
+      <li><a href="#" onclick="showModule('history')">History</a></li>
+      <li><a href="#" onclick="showModule('settings')">Settings</a></li>
+    </ul>
+  </nav>
+
+  <div class="card" id="homeModule">
     <div class="balance">Balance: $<span id="balance">1000</span></div>
     <input type="number" id="amount" placeholder="Enter amount" />
     <button onclick="deposit()">Deposit</button>
     <button onclick="withdraw()">Withdraw</button>
+    <button onclick="resetBalance()">Reset Balance</button>
     <div class="message" id="message"></div>
+    <div class="history" id="historyModule">
+      <h3>Transaction History</h3>
+      <ul id="historyList"></ul>
+    </div>
   </div>
-
+  <!-- Add more module containers here if needed -->
   <script src="script.js"></script>
 </body>
 </html>
